@@ -7,6 +7,8 @@ Full brief: **ASSIGNMENT.pdf**.  In short:
 
 **The bar:** aim for **>95% accuracy** on held-out photos.
 
+🔴 **Live demo:** https://huggingface.co/spaces/Devansh1009/spot-the-fake-photo
+
 ---
 
 ## Quick start
