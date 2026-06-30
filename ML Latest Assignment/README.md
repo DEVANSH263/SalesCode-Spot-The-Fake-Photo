@@ -13,7 +13,7 @@ Full brief: **ASSIGNMENT.pdf**.  In short:
 
 ```bash
 # 1. Install dependencies (once)
-pip install torch torchvision scikit-learn scikit-image scipy opencv-python pillow
+pip install -r requirements.txt
 
 # 2. Train (creates model_nn.pt and model.pkl)
 python train_nn.py      # fine-tuned EfficientNet-B0  (~17 min, CPU)
@@ -24,7 +24,7 @@ python predict.py path/to/image.jpg
 # Prints a number 0–1:  0 = real photo,  1 = photo of a screen
 
 # 4. (Optional) Live camera demo
-pip install gradio
+pip install -r requirements-demo.txt
 python app.py
 # Opens a local webcam demo at http://127.0.0.1:7860
 # See DEPLOY.md to put it online for free on Hugging Face Spaces.

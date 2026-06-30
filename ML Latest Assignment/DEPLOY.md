@@ -49,8 +49,11 @@ Copy-Item "ML Latest Assignment\predict.py" "spot-the-fake-photo\"
 Copy-Item "ML Latest Assignment\features.py" "spot-the-fake-photo\"
 Copy-Item "ML Latest Assignment\model.pkl" "spot-the-fake-photo\"
 Copy-Item "ML Latest Assignment\model_nn.pt" "spot-the-fake-photo\"
-Copy-Item "ML Latest Assignment\requirements.txt" "spot-the-fake-photo\"
 Copy-Item "ML Latest Assignment\README_SPACE.md" "spot-the-fake-photo\README.md"
+
+# Spaces only auto-installs from requirements.txt, so merge core + demo deps
+Get-Content "ML Latest Assignment\requirements.txt", "ML Latest Assignment\requirements-demo.txt" |
+    Set-Content "spot-the-fake-photo\requirements.txt"
 
 cd spot-the-fake-photo
 git add .
