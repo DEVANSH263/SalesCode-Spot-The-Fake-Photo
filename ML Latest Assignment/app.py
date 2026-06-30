@@ -17,6 +17,7 @@ from pathlib import Path
 
 os.environ.setdefault("GRADIO_ANALYTICS_ENABLED", "False")
 
+import numpy as np
 import gradio as gr
 from PIL import Image
 
@@ -41,13 +42,19 @@ navigator.mediaDevices.getUserMedia = (constraints) => {
 """
 
 
-def classify(img: Image.Image):
+def classify(img):
     """Run one frame through the model. Always returns a dict for gr.Label
-    and a short status string — never raises, so the stream never stalls."""
+    and a short status string — never raises, so the stream never stalls.
+
+    Gradio's webcam stream can hand us either a numpy array or a PIL Image
+    depending on version/config, so we normalise to PIL first."""
     if img is None:
         return {"Waiting for camera…": 1.0}, "Point the camera at something."
 
     try:
+        if isinstance(img, np.ndarray):
+            img = Image.fromarray(img)
+
         tmp_path = _DIR / "_live_frame.jpg"
         img.convert("RGB").save(tmp_path, quality=90)
 
@@ -82,6 +89,7 @@ with gr.Blocks(title="Spot the Fake Photo") as demo:
                 sources=["webcam"],
                 streaming=True,
                 label="Camera (click once to start)",
+                type="numpy",
             )
         with gr.Column(scale=1):
             result = gr.Label(label="Live prediction", num_top_classes=2)
