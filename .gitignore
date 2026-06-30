@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+_live_frame.jpg
+.ipynb_checkpoints/
+.DS_Store
+Data.zip
+__MACOSX/
