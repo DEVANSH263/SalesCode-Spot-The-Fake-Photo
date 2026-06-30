@@ -22,6 +22,12 @@ python train.py         # classical + CNN feature ensemble  (~1 min)
 # 3. Predict
 python predict.py path/to/image.jpg
 # Prints a number 0–1:  0 = real photo,  1 = photo of a screen
+
+# 4. (Optional) Live camera demo
+pip install gradio
+python app.py
+# Opens a local webcam demo at http://127.0.0.1:7860
+# See DEPLOY.md to put it online for free on Hugging Face Spaces.
 ```
 
 ---
@@ -37,6 +43,8 @@ python predict.py path/to/image.jpg
 | `model_nn.pt` | Saved fine-tuned NN (primary; ~20 MB) |
 | `model.pkl` | Saved RF+SVM ensemble (fallback; ~50 MB) |
 | `note.md` | **Full solution write-up** (approach, accuracy, latency, cost) |
+| `app.py` | Live camera demo (Gradio) — run `python app.py` |
+| `DEPLOY.md` | How to push the demo to Hugging Face Spaces (free) |
 
 ---
 
