@@ -127,6 +127,11 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python predict.py <image_path>", file=sys.stderr)
         sys.exit(1)
-    # Plain decimal output (e.g. 0.0000, 0.9312) instead of scientific
-    # notation (e.g. 3.2e-05), so the score is easy to read at a glance.
-    print(f"{predict(sys.argv[1]):.4f}")
+    # Full-precision plain decimal (e.g. 0.9999986886978149) instead of
+    # scientific notation (e.g. 3.2e-05), so the score is never displayed
+    # with an exponent while keeping the full floating-point precision.
+    score = predict(sys.argv[1])
+    text = f"{score:.20f}".rstrip("0")
+    if text.endswith("."):
+        text += "0"
+    print(text)
