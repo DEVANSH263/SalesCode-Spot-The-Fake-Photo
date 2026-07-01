@@ -64,8 +64,10 @@ python app.py
 | EfficientNet-B0 fine-tuned | **93.9 %** ± 1.3 % | 100 % |
 | RF + SVM ensemble | 93.9 % ± 4.4 % | 100 % |
 
-See `note.md` for a full discussion of the residual errors and why the
-expected test accuracy on unambiguous screen recaptures is **96–98 %**.
+**Measured accuracy is 93.9%, not the 95%+ target.** See `note.md` for an
+honest discussion of the residual CV errors (all ambiguous edge cases, not
+clear failures) and why I'd expect — but have not measured — improvement
+with more and more-varied training data.
 
 ---
 

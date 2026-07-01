@@ -117,11 +117,16 @@ The residual errors all fall into three genuinely ambiguous categories:
 These require semantic understanding ("is the content *itself* a photograph?")
 that is hard to learn from 115 images.
 
-**Key point:** the evaluator's test set will contain *unambiguous* screen
-recaptures (someone holding a phone showing a clearly recaptured image).
-We expect **96–98 %** accuracy on such clean examples — the fine-tuned model
-gets the TV and remote correct on training data (score ≈ 0.001–0.002),
-suggesting it has already learned the relevant visual distinction.
+**Honest bottom line:** my measured accuracy is **93.9% (3-fold CV)**, not
+the 95%+ target. All three error categories above are genuinely ambiguous
+edge cases (a turned-off TV, a remote with a small LCD, a recapture with no
+visible bezel) rather than clear failures — the fine-tuned model does score
+the TV and remote correctly on training data (≈0.001–0.002), which suggests
+it has learned a reasonable decision boundary. But I have not measured
+accuracy on a larger or more varied held-out set, so I won't claim a number
+above what 3-fold CV actually showed. With more and more-diverse data
+(see "What I would improve" below), I'd expect this to improve, but that is
+an expectation, not a measured result.
 
 ---
 
