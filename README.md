@@ -75,4 +75,4 @@ with more and more-varied training data.
 | Cloud CPU (t3.medium) | ~51 ms | ~$0.50 / 1 000 images |
 | Cloud GPU batch | ~5–10 ms | ~$0.04 / 1 000 images |
 
-~1 day. Use whatever tools you like.
+See `note.md` for full assumptions behind these numbers.
