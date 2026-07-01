@@ -24,12 +24,10 @@ python train.py         # classical + CNN feature ensemble  (~1 min)
 # 3. Predict
 python predict.py path/to/image.jpg
 # Prints a number 0–1:  0 = real photo,  1 = photo of a screen
-
-# 4. (Optional) Live camera demo
-pip install -r requirements-demo.txt
-python app.py
-# Opens a local webcam demo at http://127.0.0.1:7860
 ```
+
+A live camera demo of this model is also deployed at the link above
+(source lives in a separate Hugging Face Space repo, not needed here).
 
 ---
 
@@ -44,7 +42,6 @@ python app.py
 | `model_nn.pt` | Saved fine-tuned NN (primary; ~20 MB) |
 | `model.pkl` | Saved RF+SVM ensemble (fallback; ~50 MB) |
 | `note.md` | **Full solution write-up** (approach, accuracy, latency, cost) |
-| `app.py` | Live camera demo (Gradio) — run `python app.py` |
 | `Data/real/`, `Data/screen/` | Training photos (52 real, 63 screen) |
 
 ---
