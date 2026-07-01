@@ -13,21 +13,27 @@ Full brief: **ASSIGNMENT.pdf**.  In short:
 
 ## Quick start
 
+Trained models (`model_nn.pt`, `model.pkl`) are already included in this repo,
+so you can predict immediately — **no training needed**.
+
 ```bash
 # 1. Install dependencies (once)
 pip install -r requirements.txt
 
-# 2. Train (creates model_nn.pt and model.pkl)
-python train_nn.py      # fine-tuned EfficientNet-B0  (~17 min, CPU)
-python train.py         # classical + CNN feature ensemble  (~1 min)
-
-# 3. Predict
+# 2. Predict
 python predict.py path/to/image.jpg
 # Prints a number 0–1:  0 = real photo,  1 = photo of a screen
 ```
 
 A live camera demo of this model is also deployed at the link above
 (source lives in a separate Hugging Face Space repo, not needed here).
+
+### Retraining from scratch (optional, not required to test predict.py)
+
+```bash
+python train_nn.py      # fine-tuned EfficientNet-B0  (~17 min, CPU) → model_nn.pt
+python train.py         # classical + CNN feature ensemble  (~1 min) → model.pkl
+```
 
 ---
 
