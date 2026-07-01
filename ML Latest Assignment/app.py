@@ -25,20 +25,25 @@ from predict import predict
 
 _DIR = Path(__file__).parent
 
-# Force the rear ("environment") camera by default on phones — Gradio has no
-# built-in control for this, so we patch getUserMedia in the page <head>.
-# Users can still switch back to the front camera using their browser's own
-# camera-switch control if their browser exposes one.
-_PREFER_BACK_CAMERA_JS = """
-<script>
-const _origGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
-navigator.mediaDevices.getUserMedia = (constraints) => {
-    if (constraints && constraints.video && typeof constraints.video === "object" && !constraints.video.facingMode) {
-        constraints.video.facingMode = { ideal: "environment" };
-    }
-    return _origGetUserMedia(constraints);
-};
-</script>
+# Default to the rear ("environment") camera on phones — most people testing
+# real vs. screen photos hold the phone up and look at the back camera feed.
+# Gradio's native WebcamOptions passes this straight to the browser's
+# getUserMedia() call, no custom JS needed.
+_WEBCAM_OPTS = gr.WebcamOptions(
+    mirror=False,
+    constraints={"video": {"facingMode": {"ideal": "environment"}}},
+)
+
+# Mobile-friendly layout: stack the camera above the result (instead of
+# side-by-side columns that get squeezed on narrow screens), and let the
+# camera preview fill most of the viewport height.
+_CSS = """
+.gradio-container { max-width: 720px !important; margin: auto; }
+#camera-box { width: 100% !important; }
+#camera-box video, #camera-box img { width: 100% !important; object-fit: cover; }
+@media (max-width: 640px) {
+    #camera-box video, #camera-box img { height: 70vh !important; }
+}
 """
 
 
@@ -77,23 +82,20 @@ with gr.Blocks(title="Spot the Fake Photo") as demo:
         # 📷 Spot the Fake Photo
         Click the camera box **once** to grant access — after that, every
         frame is scored automatically, live, with no further clicks.
-
-        Point it at something real, or at another screen/printout showing a
-        photo, and watch the prediction update.
+        On phones this opens your **back camera** by default.
         """
     )
 
-    with gr.Row():
-        with gr.Column(scale=1):
-            cam = gr.Image(
-                sources=["webcam"],
-                streaming=True,
-                label="Camera (click once to start)",
-                type="numpy",
-            )
-        with gr.Column(scale=1):
-            result = gr.Label(label="Live prediction", num_top_classes=2)
-            status = gr.Markdown("Waiting for camera…")
+    cam = gr.Image(
+        sources=["webcam"],
+        streaming=True,
+        label="Camera (click once to start)",
+        type="numpy",
+        webcam_options=_WEBCAM_OPTS,
+        elem_id="camera-box",
+    )
+    result = gr.Label(label="Live prediction", num_top_classes=2)
+    status = gr.Markdown("Waiting for camera…")
 
     # stream_every controls how often a new frame is sent (seconds).
     # time_limit is set high so the stream keeps running continuously
@@ -107,4 +109,4 @@ with gr.Blocks(title="Spot the Fake Photo") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(theme=gr.themes.Soft(primary_hue="emerald"), head=_PREFER_BACK_CAMERA_JS)
+    demo.launch(theme=gr.themes.Soft(primary_hue="emerald"), css=_CSS)
