@@ -80,16 +80,20 @@ with gr.Blocks(title="Spot the Fake Photo") as demo:
     gr.Markdown(
         """
         # 📷 Spot the Fake Photo
-        Click the camera box **once** to grant access — after that, every
-        frame is scored automatically, live, with no further clicks.
-        On phones this opens your **back camera** by default.
+        Your browser will show a small **"Record"** button below — that's
+        just a one-time camera-permission click (every site that uses a
+        camera, e.g. Zoom or Google Meet, requires this by browser security
+        rules — it is **not** ongoing recording, nothing is saved).
+        After that single click, every frame is scored automatically and
+        live, with **no further clicks needed**. On phones this opens your
+        **back camera** by default.
         """
     )
 
     cam = gr.Image(
         sources=["webcam"],
         streaming=True,
-        label="Camera (click once to start)",
+        label="Camera — click \"Record\" once for permission, then it's fully live",
         type="numpy",
         webcam_options=_WEBCAM_OPTS,
         elem_id="camera-box",
