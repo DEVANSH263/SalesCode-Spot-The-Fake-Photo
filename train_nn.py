@@ -13,7 +13,7 @@ Strategy
 Usage
 -----
     python train_nn.py
-    python train_nn.py --data ../../Data --out model_nn.pt --epochs 30
+    python train_nn.py --data Data --out model_nn.pt --epochs 30
 
 Output
 ------
@@ -192,7 +192,7 @@ def load_paths_labels(data_dir: Path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data",   default=str(Path(__file__).parent.parent / "Data"))
+    parser.add_argument("--data",   default=str(Path(__file__).parent / "Data"))
     parser.add_argument("--out",    default=str(Path(__file__).parent / "model_nn.pt"))
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--folds",  type=int, default=3,

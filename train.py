@@ -4,7 +4,7 @@ Train the screen-vs-real photo detector.
 Usage
 -----
     python train.py                          # uses default paths
-    python train.py --data ../../Data --out model.pkl
+    python train.py --data Data --out model.pkl
 
 Outputs
 -------
@@ -68,7 +68,7 @@ def load_dataset(data_dir: Path):
 
 def main():
     parser = argparse.ArgumentParser(description="Train screen-vs-real detector")
-    parser.add_argument("--data", default=str(Path(__file__).parent.parent / "Data"),
+    parser.add_argument("--data", default=str(Path(__file__).parent / "Data"),
                         help="Folder containing real/ and screen/ subfolders")
     parser.add_argument("--out",  default=str(Path(__file__).parent / "model.pkl"),
                         help="Output path for the trained model")

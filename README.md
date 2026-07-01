@@ -29,7 +29,6 @@ python predict.py path/to/image.jpg
 pip install -r requirements-demo.txt
 python app.py
 # Opens a local webcam demo at http://127.0.0.1:7860
-# See DEPLOY.md to put it online for free on Hugging Face Spaces.
 ```
 
 ---
@@ -46,7 +45,7 @@ python app.py
 | `model.pkl` | Saved RF+SVM ensemble (fallback; ~50 MB) |
 | `note.md` | **Full solution write-up** (approach, accuracy, latency, cost) |
 | `app.py` | Live camera demo (Gradio) — run `python app.py` |
-| `DEPLOY.md` | How to push the demo to Hugging Face Spaces (free) |
+| `Data/real/`, `Data/screen/` | Training photos (52 real, 63 screen) |
 
 ---
 
